@@ -46,3 +46,22 @@ export interface GeminiResponse {
   comment: string;
   meme_caption: string;
 }
+
+// Razorpay types
+export interface RazorpayOrder {
+  id: string;
+  amount: number;
+  currency: string;
+  receipt: string;
+  notes?: {
+    userId: string;
+    plan: string;
+  };
+}
+
+export interface RazorpayVerification {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+  plan: 'monthly' | 'yearly';
+}

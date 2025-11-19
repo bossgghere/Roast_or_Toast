@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import roastRoutes from "./routes/roastRoutes.js";  // Add this
+import subscriptionRoutes from "./routes/subscriptionRoutes.js";  // Add this
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.use('/auth', authRoutes);
 app.use('/roast', roastRoutes);  // Add this
+app.use('/subscription', subscriptionRoutes); 
 
 // Health check
 app.get('/', (req, res) => {
