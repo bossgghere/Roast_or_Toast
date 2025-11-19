@@ -3,6 +3,7 @@ import multer from 'multer';
 import { createRoast } from '../controllers/roastController.js';
 import { verifyToken } from '../middleware/auth.js';
 import { checkSubscription } from '../middleware/subscription.js';
+import {getRoastHistory} from '../controllers/roastController.js';
 
 const router = express.Router();
 
@@ -29,5 +30,6 @@ const upload = multer({
 });
 
 router.post('/create', verifyToken, checkSubscription, upload.single('image'), createRoast);
+router.get('/history',verifyToken,getRoastHistory);
 
 export default router;

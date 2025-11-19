@@ -3,6 +3,7 @@ import { AuthRequest, RoastRequestDTO } from '../types/index.js';
 import prisma from '../config/database.js';
 import { generateRoastOrCompliment } from '../services/openaiService.js';
 import fs from 'fs';
+import { SelectObjectContentCommand } from '@aws-sdk/client-s3';
 
 export const createRoast = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
@@ -56,4 +57,33 @@ export const createRoast = async (req: AuthRequest, res: Response): Promise<void
     console.error('Roast creation error:', error);
     res.status(500).json({ message: 'Error generating roast/compliment' });
   }
+};
+
+export const getRoastHistory = async (req: AuthRequest, res: Response): Promise<void> => {
+    try{
+        const userId = req.user!.id;
+
+        const roasts = await prisma.roast.findMany({
+            where: { userId: userId },
+            orderBy: { createdAt: 'desc' },
+            select: {
+                id: true,
+                imageUrl: true,
+                type: true,
+                resultText: true,
+                comment: true,
+                memeCaption: true,
+                createdAt: true
+            }
+        });
+
+        res.json({ 
+            count: roasts.length,
+            roasts 
+        });
+    }
+    catch(error){
+        console.error('Roast history error:', error);
+        res.status(500).json({ message: 'Error fetching roast history' });
+    }
 };
