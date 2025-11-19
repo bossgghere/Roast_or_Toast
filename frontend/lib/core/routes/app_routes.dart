@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/presentation/screens/login_screen.dart';
+import 'package:frontend/presentation/screens/register_screen.dart';
 import '../../presentation/screens/splash_screen.dart';
 // Import screens as we create them
 // import '../../presentation/screens/login_screen.dart';
@@ -21,8 +23,8 @@ class AppRoutes {
   // Route map
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
-    login: (context) => const Placeholder(), // Replace with LoginScreen
-    register: (context) => const Placeholder(), // Replace with RegisterScreen
+    login: (context) => LoginScreen(), // Replace with LoginScreen
+    register: (context) =>  RegisterScreen(), // Replace with RegisterScreen
     home: (context) => const Placeholder(), // Replace with HomeScreen
     result: (context) => const Placeholder(), // Replace with ResultScreen
     profile: (context) => const Placeholder(), // Replace with ProfileScreen

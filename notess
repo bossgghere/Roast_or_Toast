@@ -1,0 +1,46 @@
+Auth Endpoints
+1. Register
+POST /auth/register
+Body: { "username": "string", "email": "string", "password": "string" }
+Response: { "token": "string", "user": {...} }
+2. Login
+POST /auth/login
+Body: { "username": "string", "password": "string" }
+Response: { "token": "string", "user": {...} }
+3. Get Me
+GET /auth/me
+Headers: Authorization: Bearer <token>
+Response: { "user": {...} }
+
+Roast Endpoints
+4. Create Roast/Compliment
+POST /roast/create
+Headers: Authorization: Bearer <token>
+Body (form-data): 
+  - image: File
+  - type: "roast" or "compliment"
+Response: { "roast": {...} }
+5. Get Roast History
+GET /roast/history
+Headers: Authorization: Bearer <token>
+Response: { "count": number, "roasts": [...] }
+
+Subscription Endpoints
+6. Create Order
+POST /subscription/create-order
+Headers: Authorization: Bearer <token>
+Body: { "plan": "monthly" or "yearly" }
+Response: { "orderId": "string", "amount": number, "keyId": "string" }
+7. Verify Payment
+POST /subscription/verify
+Headers: Authorization: Bearer <token>
+Body: { "razorpay_order_id": "string", "razorpay_payment_id": "string", "razorpay_signature": "string", "plan": "monthly" or "yearly" }
+Response: { "user": {...} }
+8. Get Subscription Status
+GET /subscription/status
+Headers: Authorization: Bearer <token>
+Response: { "isPro": boolean, "subscriptionPlan": string, "daysLeft": number }
+9. Get Payment History
+GET /subscription/payment-history
+Headers: Authorization: Bearer <token>
+Response: { "payments": [...] }
